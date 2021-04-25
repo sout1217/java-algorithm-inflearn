@@ -3,58 +3,53 @@ package com.company.demo;
 import java.util.Scanner;
 
 /**
- * 2. 대소문자 변환
- * 설명
+* 설명
  *
- * 대문자와 소문자가 같이 존재하는 문자열을 입력받아 대문자는 소문자로 소문자는 대문자로 변환하여 출력하는 프로그램을 작성하세요.
+ * 한 개의 문장이 주어지면 그 문장 속에서 가장 긴 단어를 출력하는 프로그램을 작성하세요.
+ *
+ * 문장속의 각 단어는 공백으로 구분됩니다.
  *
  *
  * 입력
- * 첫 줄에 문자열이 입력된다. 문자열의 길이는 100을 넘지 않습니다.
- *
- * 문자열은 영어 알파벳으로만 구성되어 있습니다.
+ * 첫 줄에 길이가 100을 넘지 않는 한 개의 문장이 주어집니다. 문장은 영어 알파벳으로만 구성되어 있습니다.
  *
  *
  * 출력
- * 첫 줄에 대문자는 소문자로, 소문자는 대문자로 변환된 문자열을 출력합니다.
- * */
+ * 첫 줄에 가장 긴 단어를 출력한다. 가장 길이가 긴 단어가 여러개일 경우 문장속에서 가장 앞쪽에 위치한
+ *
+ * 단어를 답으로 합니다.
+* */
 
 /**
- * 예시 입력
- * StuDY
+ * 예시답안
+ * it is time to study
  *
- * 예시 출력
- * sTUdy
+ * 예시출력
+ * study
  * */
-
 
 public class Main {
 
     public String solution(String str) {
-        String answer = "";
 
-        for (char c : str.toCharArray()) { // 글자마다 순환
-            if (Character.isUpperCase(c)) { // 대문자 인 경우 소문자로
-                c = Character.toLowerCase(c);
-            } else {
-                c = Character.toUpperCase(c); // 소문자 인 경우 대문자로
+        String[] strArray = str.split(" ");
+
+        int longStringIndex = 0;
+
+        for (int i = 1; i < strArray.length -1; i++) {
+            if (strArray[longStringIndex].length() < strArray[i+1].length()) {
+                longStringIndex = i+1;
             }
-
-            answer += c; // 변환 된 문자를 answer 에 합쳐간다
-
-            // 이 방식 이외에도 asc 코드를 활용한 방법도 있다
         }
-
-        return answer;
+        return strArray[longStringIndex];
     }
 
     public static void main(String[] args) {
         Main T = new Main();
 
         Scanner sc = new Scanner(System.in);
-        String str = sc.next();
+        String str = sc.nextLine();
         System.out.println(T.solution(str));
-
     }
 }
 
