@@ -34,18 +34,30 @@ public class Main {
 
         String answer = "";
 
-        int minValue = Integer.MIN_VALUE; // 가장 작은 int 형 정수 (처음 비교대상을 제일 작은 수로 함)
+        int minValue = Integer.MIN_VALUE;
+        int pos;
 
-        String[] strArr = str.split(" "); // 배열로 나눔
+        while((pos = str.indexOf(" ")) != -1) {
+            // pos = str.indexOf(" ") = 2 번째 인덱스를 반환한다
+            // 그리고 while 로 -1 반환 (존재하지 않을 때 까지) 반복한다
 
-        for (String s : strArr) {
+            String tmp = str.substring(0, pos);
+            // 처음 가져온 단어를 넣는다 (subString(0, 2) 을 통해 0~1 까지 단어를 자른다
 
-            if (s.length() > minValue) { // 글자의 길이가 최소값보다 큰 경우에만 변환
-                answer = s;
-                minValue = s.length(); // minValue (비교 길이)를 가장 긴 길이로 설정함
+            int len = tmp.length();
+            // 해당 단어의 문자길이를 반환
+
+            if (len > minValue) {
+                minValue = len;
+                answer = tmp;
             }
+            // 가장 작은 값보다 큰 경우 값 변경
 
+            str = str.substring(pos + 1);
+            // it is time to study.substring(3) 부터 잘라내어
+            // is time to study 문장이 된다다
         }
+        if (str.length() > minValue) answer = str;
 
         return answer;
     }
@@ -56,6 +68,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         System.out.println(T.solution(str));
+
     }
 }
-
