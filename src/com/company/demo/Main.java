@@ -32,16 +32,22 @@ public class Main {
 
     public String solution(String str) {
 
-        String[] strArray = str.split(" ");
+        String answer = "";
 
-        int longStringIndex = 0;
+        int minValue = Integer.MIN_VALUE; // 가장 작은 int 형 정수 (처음 비교대상을 제일 작은 수로 함)
 
-        for (int i = 1; i < strArray.length -1; i++) {
-            if (strArray[longStringIndex].length() < strArray[i+1].length()) {
-                longStringIndex = i+1;
+        String[] strArr = str.split(" "); // 배열로 나눔
+
+        for (String s : strArr) {
+
+            if (s.length() > minValue) { // 글자의 길이가 최소값보다 큰 경우에만 변환
+                answer = s;
+                minValue = s.length(); // minValue (비교 길이)를 가장 긴 길이로 설정함
             }
+
         }
-        return strArray[longStringIndex];
+
+        return answer;
     }
 
     public static void main(String[] args) {
