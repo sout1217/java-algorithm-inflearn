@@ -39,11 +39,20 @@ public class Main {
 
         ArrayList<String> arrayList = new ArrayList<>();
 
-        for (String s : strArr) {
-            String tmp = new StringBuilder(s).reverse().toString();
-            // String + String 하거나, String replaceAll 사용 시 새로운 객체를 사용하여 메모리를 낭비시킨다
-            // StringBuilder 는 처음에 만들어진 객체 하나로만 사용한다
+        for (String s : strArr) { // String[] 순환
+            char[] c = s.toCharArray(); // String 을 char[] 배열로 생성
 
+            int first = 0, last = s.length() - 1; // 단어의 맨 앞과 맨 끝을 초기값으로 지정
+
+            while (first < last) { // 앞의 인덱스 값이, 마지막 인덱스값보다 작은 경우에만 실행
+                char temp = c[first];
+                c[first] = c[last];
+                c[last] = temp; // first 와 last 위치 바꾼 후
+                first++; // first 증가 last 감소 Tile => (1,4)=eimT => (2,3)=emiT
+                last--;
+            }
+
+            String tmp = String.valueOf(c);
             arrayList.add(tmp);
         }
 
